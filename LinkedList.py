@@ -1,3 +1,6 @@
+from typing import Counter
+
+
 class Node:
     def __init__(self, data, next=None):
         self.data = data
@@ -69,6 +72,41 @@ class LinkedList:
         if current.next is None:
             print("Node is not found")
 
+    def deleteAtStart(self):
+        if self.head is None:
+            print('List is empty, can\'t delete')
+        else:
+            self.head = self.head.next
+
+    def deleteAtEnd(self):
+        if self.head is None:
+            print('List is empty, can\'t delete')
+            return
+        current = self.head
+        while current.next.next is not None:
+            current = current.next
+        current.next = None
+
+    def deleteNode(self, x):
+        if self.head is None:
+            print('List is empty, can\'t delete')
+            return
+        if self.head and self.head.data == x:
+            self.head = self.head.next
+
+        current = self.head
+        if current:
+            while current.next is not None:
+                if current.next.data == x:
+                    current.next = current.next.next
+
+                else:
+                    current = current.next
+            if current is None:
+                print('node not found')
+        else:
+            print("can't delete from empty list")
+
 
 myList = LinkedList()
 
@@ -83,6 +121,11 @@ myList.addAtStart(10)
 myList.addAtStart(20)
 myList.addAtEnd(100)
 myList.addAtEnd(40)
-# myList.addAfterNode(200, 60)
+myList.addAfterNode(200, 60)
 myList.addBeforeNode(200, 20)
+
+myList.deleteAtStart()
+
+myList.deleteNode(60)
+myList.deleteAtEnd()
 myList.traversal()
